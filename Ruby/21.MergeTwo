@@ -42,10 +42,34 @@ Both list1 and list2 are sorted in non-decreasing order.
 #         @next = _next
 #     end
 # end
+
 # @param {ListNode} list1
 # @param {ListNode} list2
 # @return {ListNode}
 def merge_two_lists(list1, list2)
-  new_list = list1 << list2
-  new_list.sort.sum
+  # 初始化一個假頭節點，它會成為合併後鏈表的頭節點
+  dummy_head = ListNode.new(0)
+  
+  # 當前節點，用於構建新的鏈表
+  current = dummy_head
+  
+  while list1 && list2
+    # 比較兩個鏈表的當前節點，選擇較小的節點接到新鏈表上
+    if list1.val < list2.val
+      current.next = list1
+      list1 = list1.next
+    else
+      current.next = list2
+      list2 = list2.next
+    end
+    
+    # 移動當前節點
+    current = current.next
+  end
+  
+  # 如果其中一個鏈表還有剩餘節點，則直接接到新鏈表的末尾
+  current.next = list1 ? list1 : list2
+  
+  # 返回合併後的鏈表頭節點
+  dummy_head.next
 end
