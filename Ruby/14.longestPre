@@ -35,7 +35,7 @@ def longest_common_prefix(strs)
   strs[1..-1].each do |x|
   i = 0
     while i < prefix.length && i < x.length
-      break if prefix[i] != str[i] # 如果字元不同，則跳出迴圈
+      break if prefix[i] != strs[i] # 如果字元不同，則跳出迴圈
       i += 1 
   end
   prefix = prefix[0...i]  # 更新前綴為共同前綴
